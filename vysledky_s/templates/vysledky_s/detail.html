@@ -1,0 +1,21 @@
+{% extends 'vysledky_s/base.html' %}
+{% block content %}
+
+		<br>
+	    <div class="tym_nazev">
+	    	<b><a href="/{{u.sezona}}/{{u.tym}}/">{{u.tym}}</a></b><br><br>
+		</div>
+	 <div class="zapasy">
+	 <table>
+	 	<th>Soupeři</th> <td>{{ u.souperi }}</td>
+	 	<tr><th>Výsledek</th> <td>{{ u.vysledek }}</td>
+	 	<tr><th>Kolo</th> <td>{{ u.kolo }}</td>
+	    <tr><th>Datum</th> <td>{{ u.datum|slice:":13" }}{{ u.datum|slice:"14:" }}</td>
+	    <tr><th>Sestava</th><td>{{ u.sestava }}</td></tr>
+	    <tr><th>Náhradníci</th> <td>{{ u.nahradnici }}</td></tr>
+	    <tr><th>Góly</th> <td>{{ u.goly }}</td></tr>
+	    <tr><th>Komentář</th> <td>{{ u.koment | safe }}</td></tr>
+	</table>
+	</div>
+<br><br><br>
+{% endblock %}

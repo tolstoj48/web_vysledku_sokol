@@ -1,0 +1,56 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Výsledky TJ Sokol Stodůlky</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Petr Musil">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+        <title>Výsledky TJ Sokol Stodůlky</title>    
+    </head>
+    <body>
+        <div class="page-header">
+            <img class="obr1" src="{% static 'obrazky/znak.png' %}">
+            <img class="obr2" src="{% static 'obrazky/znak.png' %}">
+            <h1><a href="/">Výsledky TJ Sokol Stodůlky</a></h1>
+            <div class="modry_menu">
+                <h3><a href="/vysledky/2019-2020/">Sezóna: > 2019/2020</a>&nbsp&nbsp&nbsp<a href="/vysledky/2018-2019/"> > 2018/2019</a><br><br>
+                    <a href="/rozpisy/"> Rozpis aktuální sezóny</a>
+                </h3><br>
+                <a href="/vysledky/{{sezona}}/A-tým/">A-TÝM</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <a href="/vysledky/{{sezona}}/B-tým/">B-TÝM</a>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <a href="/vysledky/{{sezona}}/C-tým/">C-TÝM</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <a href="/vysledky/{{sezona}}/Starší dorost/">STARŠÍ DOROST</a>
+                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                 <a href="/vysledky/{{sezona}}/Mladší dorost/">MLADŠÍ DOROST</a>
+                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <a href="/vysledky/{{sezona}}/Starší žáci/">STARŠÍ ŽÁCI</a>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <a href="/vysledky/{{sezona}}/Mladší žáci A">MLADŠÍ ŽÁCI A</a>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <a href="/vysledky/{{sezona}}/Mladší žáci B">MLADŠÍ ŽÁCI B</a>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <a href="/vysledky/{{sezona}}/Mladší žáci C">MLADŠÍ ŽÁCI C</a><br><br>
+                <a href="/vysledky/{{sezona}}/strelci/">NEJLEPŠÍ STŘELCI KLUBU A TÝMŮ</a>
+            </div>
+        </div>
+            <div class="bily">  
+              {% block content %}
+              {% endblock %}
+            </div>
+        </div>
+        <br><br><br><br>
+    <div class="footer">
+        <br>
+        copyleft Petr with Django and love / tables by Ája / 2018
+    </div>
+    </body>
+</html>

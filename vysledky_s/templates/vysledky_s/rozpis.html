@@ -1,0 +1,160 @@
+{% extends 'vysledky_s/base.html' %}
+{% block content %}
+
+
+<div class="zapasy">
+    
+    <br>
+    <h2> Rozpisy aktuální sezóny: </h2>
+    <h3> Rozpis utkání týmů Sokola v následujících sedmi kalendářních dnech:</h3><br>
+    <table>
+        <th>Tým</th><th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+    {% for i in rozpis %}
+        {% if i.datum >= startdate and i.datum <= enddate %}
+            {% if i.domaci|slice:"0:8" == "Sokol St" or i.domaci|slice:"0:8" == "Stodůlky" %}
+                <tr> <td>{{ i.tym}}</td><td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.tym}}</td><td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+            {% endif %}
+        {% endif %}
+    {%endfor%}
+</table>
+
+
+    <h3>A-tým</h3><br>
+    <table id="myTable">
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+            {% if i.tym == "A-tým" %}
+                {% if i.domaci|slice:"0:8" == "Sokol St" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+    </table>
+
+    <h3>B-tým</h3><br>
+    <table>
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+            {% if i.tym == "B-tým" %}
+                {% if i.domaci|slice:"0:8" == "Sokol St" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+            
+        {% endfor %}
+    </table>
+
+    <h3>C-tým</h3><br>
+    <table>
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+            {% if i.tym == "C-tým" %}
+                {% if i.domaci == "Stodůlky C" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+            
+        {% endfor %}
+    </table>
+
+     <h3>Starší dorost</h3><br>
+    <table>
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+            {% if i.tym == "Starší dorost" %}
+                {% if i.domaci == "Stodůlky" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+            
+        {% endfor %}
+    </table>
+
+    <h3>Mladší dorost</h3><br>
+    <table>
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+        {% if i.tym == "Mladší dorost" %}
+                {% if i.domaci == "Stodůlky" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+            
+        {% endfor %}
+    </table>
+
+ <h3>Starší žáci</h3><br>
+    <table>
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+        {% if i.tym == "Starší žáci" %}
+                {% if i.domaci == "Stodůlky" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+            
+        {% endfor %}
+    </table>
+
+ <h3>Mladší žáci A</h3><br>
+    <table>
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+        {% if i.tym == "Mladší žáci A" %}
+                {% if i.domaci == "Stodůlky" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+            
+        {% endfor %}
+    </table>
+
+ <h3>Mladší žáci B</h3><br>
+    <table>
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+        {% if i.tym == "Mladší žáci B" %}
+                {% if i.domaci == "Stodůlky B" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+            
+        {% endfor %}
+    </table>
+
+     <h3>Mladší žáci C</h3><br>
+    <table>
+        <th>Den</th><th>Datum</th><th>Čas</th><th>Domácí</th><th>Hosté</th><th style="text-align: center">Doma/venku</th>
+        {% for i in rozpis %}
+        {% if i.tym == "Mladší žáci C" %}
+                {% if i.domaci|slice:"0:8" == "Stodůlky" %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="background-color: #B3C1F0; text-align: center">doma</td></tr>
+                {% else %}
+                <tr> <td>{{ i.datum| date:"l" }}</td> <td>{{i.datum}}</td> <td>{{i.cas}}</td> <td>{{i.domaci}}</td> <td>{{i.hoste}}</td>  <td  style="text-align: center">venku</td></tr>
+                {% endif %}
+            {% endif %}
+            
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

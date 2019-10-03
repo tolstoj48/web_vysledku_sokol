@@ -1,0 +1,93 @@
+{% extends 'vysledky_s/base.html' %}
+{% block content %}
+	{% if u %}
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <br>
+		<div class="tym_nazev">
+		    <b><a href="/vysledky/{{u.0.sezona}}/"> Sezóna {{u.0.sezona}}</a><br><br>
+		    <a href="/vysledky/{{u.0.sezona}}/{{u.0.tym}}/"> {{u.0.tym}} - {{u.0.soutez|slice:"4:"}}</a></b>
+		    <br>
+		</div>
+
+		<br>
+		<input id="myInput" type="text" placeholder="Vyhledat utkání dle soupeře/data..." size="30" maxlength="30">
+		<br><br>
+
+		<div class="zapasy">
+		    <table id="myTable">
+		    	<th>Kolo</th><th>Datum</th><th>Utkání</th><th style="text-align: center">Výsledek</th><th style="text-align: center">Poločas</th>
+			    {% for utkani in u reversed %}
+			    	{% if utkani.vysledek|slice:"1:2" == ":" %}
+				    	{% if utkani.vysledek|slice:":1" > utkani.vysledek|slice:"2:4" and utkani.souperi|slice:":10" == "Sokol Stod" %}
+				        	<tr  class="bun"><td>{{ utkani.kolo }}.</td><td>{{ utkani.datum|slice:":13" }}{{ utkani.datum|slice:"14:" }} </td><td> <a href="/vysledky/{{utkani.sezona}}/{{utkani.tym}}/{{utkani.id}}/">  {{ utkani.souperi }}</a></td><td style="text-align: center; background-color: #8AEC39">{{utkani.vysledek|slice:":4"}}</td><td style="text-align: center">{{utkani.vysledek|slice:"4:"}}</td></tr>
+				    	{% elif utkani.vysledek|slice:":1" < utkani.vysledek|slice:"2:3" and utkani.souperi|slice:":10" != "Sokol Stod" %}
+				        	<tr  class="bun"><td>{{ utkani.kolo }}.</td><td>{{ utkani.datum|slice:":13" }}{{ utkani.datum|slice:"14:" }} </td><td> <a href="/vysledky/{{utkani.sezona}}/{{utkani.tym}}/{{utkani.id}}/">  {{ utkani.souperi }}</a></td><td style="text-align: center; background-color: #8AEC39">{{utkani.vysledek|slice:":4"}}</td><td style="text-align: center">{{utkani.vysledek|slice:"4:"}}</td></tr>
+				    	{% elif utkani.vysledek|slice:":1" == utkani.vysledek|slice:"2:3"%}
+				    		<tr  class="bun"><td>{{ utkani.kolo }}.</td><td>{{ utkani.datum|slice:":13" }} {{ utkani.datum|slice:"14:" }} </td><td> <a href="/vysledky/{{utkani.sezona}}/{{utkani.tym}}/{{utkani.id}}/">  {{ utkani.souperi }}</a></td><td style="text-align: center; background-color: #FFB556">{{utkani.vysledek|slice:":4"}}</td><td style="text-align: center">{{utkani.vysledek|slice:"4:"}}</td></tr>
+				    	{% else %}
+				    		<tr  class="bun"><td>{{ utkani.kolo }}.</td><td>{{ utkani.datum|slice:":13" }} {{ utkani.datum|slice:"14:" }} </td><td> <a href="/vysledky/{{utkani.sezona}}/{{utkani.tym}}/{{utkani.id}}/">  {{ utkani.souperi }}</a></td><td style="text-align: center; background-color: #FF4D4D">{{utkani.vysledek|slice:":4"}}</td><td style="text-align: center">{{utkani.vysledek|slice:"4:"}}</td></tr>
+				    	{% endif %}
+				    {% else %}
+				    	{% if utkani.vysledek|slice:"2:3" == ":" %}
+				    		{% if utkani.souperi|slice:":10" == "Sokol Stod"%}
+				        	<tr  class="bun"><td>{{ utkani.kolo }}.</td><td>{{ utkani.datum|slice:":13" }}{{ utkani.datum|slice:"14:" }} </td><td> <a href="/vysledky/{{utkani.sezona}}/{{utkani.tym}}/{{utkani.id}}/">  {{ utkani.souperi }}</a></td><td style="text-align: center; background-color: #8AEC39">{{utkani.vysledek|slice:":4"}}</td><td style="text-align: center">{{utkani.vysledek|slice:"4:"}}</td></tr>
+				        {% elif utkani.souperi|slice:"14:" == "Sokol Stod"%}}
+				        	<tr  class="bun"><td>{{ utkani.kolo }}.</td><td>{{ utkani.datum|slice:":13" }}{{ utkani.datum|slice:"14:" }} </td><td> <a href="/vysledky/{{utkani.sezona}}/{{utkani.tym}}/{{utkani.id}}/">  {{ utkani.souperi }}</a></td><td style="text-align: center; background-color: #8AEC39">{{utkani.vysledek|slice:":4"}}</td><td style="text-align: center">{{utkani.vysledek|slice:"4:"}}</td></tr>
+				    	{% else %}
+				    		<tr class="bun"><td>{{ utkani.kolo }}.</td><td>{{ utkani.datum|slice:":13" }}{{ utkani.datum|slice:"14:" }} </td><td> <a href="/vysledky/{{utkani.sezona}}/{{utkani.tym}}/{{utkani.id}}/">  {{ utkani.souperi }}</a></td><td style="text-align: center; background-color: #FF4D4D">{{utkani.vysledek|slice:":4"}}</td><td style="text-align: center">{{utkani.vysledek|slice:"4:"}}</td></tr>
+				    	
+				    	{% endif %}
+			        {% endif %}
+			    	{% endif %}
+			    {% endfor %}
+			 </table>
+			 <br><br>
+		</div>
+		    
+		<div class="strelci">
+			<div class="tym_nazev">
+				<b>Střelci týmu</b>
+			</div>
+		    <table>
+		    	<th>Střelci týmu</th><th style="text-align: center">Branky</th>
+				{% for strelec in list_strelci|slice:"1:" %}
+					 <tr><td>{{strelec.0}}</td><td style="text-align: center">{{strelec.1}}</td></tr>
+				{% endfor %}
+			</table> 
+			<br><br>
+		</div>
+
+		<div class="tabulka">
+			<div class="tym_nazev"><b>Tabulka po {{tabulka.0.2}}. kole</b>
+			</div>
+			<table>
+				<th>Pořadí</th><th style="text-align: left"> Tým</th><th>Odehraná utkání</th><th>Vítězství</th><th> Remíz</th><th>Proher</th><th>Skóre</th><th>Body</th>
+				{% for klub in tabulka %}
+					{% if klub.1|slice:":11" == "Sokol Stodů" %}
+						<tr style="background-color: #B3C1F0"><td>{{klub.0}}</td><td style="text-align: left">{{klub.1}}</td><td>{{klub.2}}</td><td>{{klub.3}}</td><td>{{klub.4}}</td><td>{{klub.5}}</td><td>{{klub.6}}</td><td>{{klub.7}}</td></tr>
+					{% else %}
+						<tr><td>{{klub.0}}</td><td style="text-align: left">{{klub.1}}</td><td>{{klub.2}}</td><td>{{klub.3}}</td><td>{{klub.4}}</td><td>{{klub.5}}</td><td>{{klub.6}}</td><td>{{klub.7}}</td></tr>
+					{% endif %}
+				{% endfor %}
+		</table>
+		<br><br>
+		</div>
+		<br><br>
+
+		<script>
+
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var  value = $(this).val().toLowerCase();
+		    $("#myTable .bun").filter(function() {
+		       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		    });
+		});
+		</script>
+	{% endif %}
+{% endblock %}
+
+
+
+

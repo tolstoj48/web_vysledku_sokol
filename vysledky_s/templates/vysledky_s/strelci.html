@@ -1,0 +1,46 @@
+{% extends 'vysledky_s/base.html' %}
+{% block content %}
+	{% if nejlepsi_strelci %}
+		    
+		<div class="strelci_nej">
+					<br>
+					<div class="tym_nazev">
+						<b><a href="/vysledky/{{sezona}}/"> Sezóna {{sezona}}</a><br><br>
+						Nejlepších 10 střelců klubu</b> *
+					</div>
+					
+					<table>
+						<th>Střelec</th><th style="text-align: center">Branky</th><th colspan="4" style="text-align: center">Tým</th>
+						{% for strelec in club_strelci|slice:"1:" %}
+								<tr><td>{{strelec.0}}</td><td style="text-align: center">{{strelec.1}}</td><td>
+									{% for i in seznam_hracu_tymu %}
+									{% if strelec.0 in i %} <td style="text-align: center">{{i|last}}</td>
+									{% else %}
+									{% endif %}
+									{% endfor %}
+								</td></tr>
+						{% endfor %}
+					</table>
+					<br>
+					* Řazení do týmů je dle toho, za které daný hráč v dané sezóně nastoupil.
+					<br><br><br>
+		</div>
+		
+
+		<div class="strelci">
+				{% for strelec in nejlepsi_strelci %}
+					<table>
+						<div class="tym_nazev">
+						<b>{{strelec.0}}</b><br>
+						</div>
+		    			<th>Střelec</th><th style="text-align: center">Branky</th>
+					{% for i in strelec|slice:"1:" %}
+						<tr><td>{{i.0}}</td><td style="text-align: center">{{i.1}}</tr></td> 
+					{% endfor %}
+				</table>
+				<br>
+				{% endfor %}
+		</div>
+		<br><br>
+	{% endif %}
+{% endblock %}
